@@ -1,6 +1,44 @@
 import { useState } from 'react';
 import { PROJECTS, FILTERS } from '../data.js';
+import { useParallax, useInView } from '../hooks.js';
 import { Photo, Label } from '../ui.jsx';
+
+const STAGGER = ['', 'reveal-d1', 'reveal-d2'];
+
+function ProjectCard({ p, idx }) {
+  const imgRef = useParallax(0.045); // image drifts gently inside its frame
+  const [cardRef, inView] = useInView(); // own observer: survives filter remounts
+  const shown = inView ? 'in' : '';
+  return (
+    <a ref={cardRef} href="#contact" className="hov group block">
+      <div className={`reveal-clip ${shown} relative overflow-hidden h-[58vw] md:h-[34vw] ${STAGGER[idx % 3]}`}>
+        <div ref={imgRef} className="parallax h-[124%] -mt-[12%]">
+          <Photo src={p.img} className="h-full transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
+        </div>
+        <div className="absolute inset-0 flex items-end p-5 bg-gradient-to-t from-ink/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[.3em] text-sand">
+            View project <span className="text-clay">↗</span>
+          </span>
+        </div>
+      </div>
+      <div className={`reveal ${shown} flex items-start justify-between gap-4 mt-5`}>
+        <div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Label>{p.year}</Label><Label>· {p.brief}</Label><Label>· {p.loc}</Label>
+          </div>
+          <h3 className="font-display font-bold text-2xl md:text-3xl mt-3 tracking-tight group-hover:text-clay transition-colors">{p.title}</h3>
+          <div className="text-dim text-sm mt-1">{p.type}</div>
+        </div>
+        <div className="text-right shrink-0">
+          <div className="font-mono text-xs text-clay">{p.size}</div>
+          <div className="mt-3 flex flex-col items-end gap-1">
+            {p.tags.map((t) => (<span key={t} className="text-[11px] font-mono text-dim">{t}</span>))}
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
 
 export function Portfolio() {
   const [filter, setFilter] = useState('All Projects');
@@ -31,27 +69,8 @@ export function Portfolio() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-x-8 gap-y-16 mt-14">
-        {list.map((p) => (
-          <a href="#contact" key={p.title} className="hov group reveal block">
-            <div className="overflow-hidden">
-              <Photo src={p.img} className="h-[58vw] md:h-[34vw] transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
-            </div>
-            <div className="flex items-start justify-between gap-4 mt-5">
-              <div>
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                  <Label>{p.year}</Label><Label>· {p.brief}</Label><Label>· {p.loc}</Label>
-                </div>
-                <h3 className="font-display font-bold text-2xl md:text-3xl mt-3 tracking-tight group-hover:text-clay transition-colors">{p.title}</h3>
-                <div className="text-dim text-sm mt-1">{p.type}</div>
-              </div>
-              <div className="text-right shrink-0">
-                <div className="font-mono text-xs text-clay">{p.size}</div>
-                <div className="mt-3 flex flex-col items-end gap-1">
-                  {p.tags.map((t) => (<span key={t} className="text-[11px] font-mono text-dim">{t}</span>))}
-                </div>
-              </div>
-            </div>
-          </a>
+        {list.map((p, idx) => (
+          <ProjectCard key={p.title} p={p} idx={idx} />
         ))}
       </div>
     </section>

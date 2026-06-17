@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParallax } from '../hooks.js';
 import { Label, Field } from '../ui.jsx';
 
 const PROJECT_TYPES = ['Residential', 'Commercial', 'Cultural', 'Interior', 'Urban Planning'];
@@ -45,7 +46,7 @@ export function Contact() {
         <div className="md:col-span-7">
           {state === 'ok' ? (
             <div className="border border-line p-10 md:p-14">
-              <div className="font-display text-3xl md:text-4xl">Asante sana.</div>
+              <div className="font-display text-3xl md:text-4xl">Thank you.</div>
               <p className="text-dim mt-3">Your inquiry has been received. A member of the studio will be in touch within two working days.</p>
             </div>
           ) : (
@@ -79,6 +80,7 @@ export function Contact() {
 }
 
 export function Footer() {
+  const markRef = useParallax(0.05);
   const cols = [
     ['Studio', ['About', 'Vision', 'Team', 'Careers']],
     ['Work', ['Residential', 'Cultural', 'Commercial', 'Interior']],
@@ -101,10 +103,13 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="font-display font-extrabold text-[18vw] leading-none tracking-tight mt-16 text-sand/5 select-none">ASILI</div>
+        <div ref={markRef} className="parallax font-display font-extrabold text-[18vw] leading-none tracking-tight mt-16 text-sand/5 select-none">ASILI</div>
         <div className="flex flex-col md:flex-row justify-between gap-4 mt-6 pt-6 border-t border-line">
           <Label>© 2026 ASILI Studio — Nairobi, Kenya</Label>
-          <Label>Designed &amp; built by Miashi · Fictional concept</Label>
+          <a href="#top" className="hov group inline-flex items-center gap-2">
+            <Label className="group-hover:text-sand transition-colors">Back to top</Label>
+            <span className="text-clay">↑</span>
+          </a>
         </div>
       </div>
     </footer>

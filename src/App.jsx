@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
-import { useReveal } from './hooks.js';
+import { useReveal, updateParallax, prefersReducedMotion } from './hooks.js';
 import { Cursor, Nav } from './sections/Header.jsx';
 import { Hero, Marquee } from './sections/Hero.jsx';
 import { Studio, Services } from './sections/Studio.jsx';
@@ -11,19 +11,26 @@ import { Contact, Footer } from './sections/Contact.jsx';
 export default function App() {
   useReveal();
 
-  // Inertia smooth-scroll. Guarded so the page never depends on it.
+  // Inertia smooth-scroll + parallax, both off one rAF loop. Guarded so the
+  // page never depends on it, and skipped entirely under reduced motion.
   useEffect(() => {
-    // Respect the user's reduced-motion preference: skip inertia scroll entirely.
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
-    let lenis;
+    if (prefersReducedMotion()) return;
+    let lenis, raf;
     try {
       lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
-      const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
     } catch {
-      /* no-op */
+      /* no-op: page scrolls natively */
     }
-    return () => lenis?.destroy?.();
+    const loop = (t) => {
+      lenis?.raf(t);
+      updateParallax();
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop);
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis?.destroy?.();
+    };
   }, []);
 
   return (

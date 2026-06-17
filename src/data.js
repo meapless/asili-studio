@@ -5,7 +5,7 @@ export const NAV = ['Studio', 'Projects', 'Vision', 'Contact'];
 export const FEATURED = [
   { n: '01', place: 'NAIROBI, KENYA — 2024', title: 'Karura Pavilion', type: 'Cultural', tags: ['Timber', 'Award-winning'],
     img: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1600&q=80' },
-  { n: '02', place: 'LAMU, KENYA — 2023', title: 'Coral Stone House', type: 'Residential', tags: ['Swahili', 'Coastal'],
+  { n: '02', place: 'LAMU, KENYA — 2023', title: 'Coral Stone House', type: 'Residential', tags: ['Coral Stone', 'Coastal'],
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80' },
   { n: '03', place: 'NAIVASHA, KENYA — 2024', title: 'Rift Escarpment Lodge', type: 'Hospitality', tags: ['Rammed earth', 'Off-grid'],
     img: 'https://images.unsplash.com/photo-1469022563428-aa04fef9f5a2?auto=format&fit=crop&w=1600&q=80' },
@@ -37,10 +37,10 @@ export const PROJECTS = [
 export const FILTERS = ['All Projects', 'Residential', 'Commercial', 'Cultural', 'Interior'];
 
 export const VISION_TABS = {
-  Maono:   { en: 'Vision',  body: 'We see a future where African architecture is not borrowed but grown — from our soil, our light, our ways of gathering. ASILI exists to build that future, one rooted, enduring space at a time.' },
-  Dhamira: { en: 'Mission', body: 'To design buildings of geometric clarity and material honesty that respond to the Kenyan climate and carry the memory of place — from Lamu’s coral stone to the red earth of the highlands.' },
-  Maadili: { en: 'Values',  body: 'Context before ego. Material before ornament. People before form. Every commission begins by listening — to the land, the client, and the communities who will live the building long after we leave.' },
-  Timu:    { en: 'Team',    body: 'A studio of 54 architects, makers and craftspeople across Nairobi and Mombasa — pairing computational design with the hands of masons who have shaped stone for generations.' },
+  Vision:  { body: 'We see a future where African architecture is not borrowed but grown, from our soil, our light, our ways of gathering. ASILI exists to build that future, one rooted, enduring space at a time.' },
+  Mission: { body: 'To design buildings of geometric clarity and material honesty that respond to the Kenyan climate and carry the memory of place, from the coral stone of the coast to the red earth of the highlands.' },
+  Values:  { body: 'Context before ego. Material before ornament. People before form. Every commission begins by listening: to the land, the client, and the communities who will live the building long after we leave.' },
+  Team:    { body: 'A studio of 54 architects, makers and craftspeople across Nairobi and Mombasa, pairing computational design with the hands of masons who have shaped stone for generations.' },
 };
 
 export const TESTIMONIALS = [

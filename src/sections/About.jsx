@@ -3,17 +3,17 @@ import { VISION_TABS, TESTIMONIALS } from '../data.js';
 import { Label } from '../ui.jsx';
 
 export function Vision() {
-  const [tab, setTab] = useState('Maono');
+  const [tab, setTab] = useState('Vision');
   const keys = Object.keys(VISION_TABS);
   return (
     <section id="vision" className="relative overflow-hidden bg-ink2 border-y border-line">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-24 md:py-36 grid md:grid-cols-12 gap-12">
         <div className="md:col-span-5">
-          <div className="flex items-center gap-4 reveal"><span className="h-px w-10 bg-clay" /><Label>Maono Yetu · Our Vision</Label></div>
+          <div className="flex items-center gap-4 reveal"><span className="h-px w-10 bg-clay" /><Label>Our Vision</Label></div>
           <h2 className="reveal font-display font-bold text-4xl md:text-6xl leading-[1.02] mt-6 tracking-tight">
-            Kujenga kesho ya usanifu wa Kiafrika
+            Building the future of <span className="text-clay">African architecture</span>
           </h2>
-          <p className="reveal reveal-d1 text-dim mt-4 italic">Building the future of African architecture.</p>
+          <p className="reveal reveal-d1 text-dim mt-5 max-w-md leading-relaxed">Not borrowed, but grown: from our soil, our light, and our ways of gathering.</p>
           <div className="reveal reveal-d2 mt-10 flex gap-10">
             <div><div className="font-display font-extrabold text-5xl">12</div><Label className="block mt-2">Countries built in</Label></div>
             <div><div className="font-display font-extrabold text-5xl">120+</div><Label className="block mt-2">Projects realised</Label></div>
@@ -28,7 +28,7 @@ export function Vision() {
                 onClick={() => setTab(k)}
                 className={`px-4 py-2 rounded-full text-sm border transition-colors ${tab === k ? 'bg-sand border-sand text-ink' : 'border-line text-sand/70 hover:text-sand'}`}
               >
-                {k} <span className="opacity-50">/ {VISION_TABS[k].en}</span>
+                {k}
               </button>
             ))}
           </div>

@@ -12,11 +12,11 @@ export function Cursor() {
     let rx = 0, ry = 0, mx = 0, my = 0, raf;
     const move = (e) => {
       mx = e.clientX; my = e.clientY;
-      if (dot.current) dot.current.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+      if (dot.current) dot.current.style.transform = `translate3d(${mx}px,${my}px,0) translate(-50%,-50%)`;
     };
     const loop = () => {
       rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-      if (ring.current) ring.current.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+      if (ring.current) ring.current.style.transform = `translate3d(${rx}px,${ry}px,0) translate(-50%,-50%)`;
       raf = requestAnimationFrame(loop);
     };
     const over = (e) => { if (e.target.closest('a,button,.hov')) ring.current?.classList.add('grow'); };
@@ -45,7 +45,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
